@@ -2,6 +2,8 @@
 
 Hey! I do tons of Elastic administration and this is a list of the most useful/used commands.
 
+Feel free to contribute!
+
 ## Restore from snapshot
 
 The restoration process tends to be relatively easy if the cluster is freshly launched or the system indices names do not conflict with the ones in the restoration name. With the commands below, you can fully restore a snapshot.
