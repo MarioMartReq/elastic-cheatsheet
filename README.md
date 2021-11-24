@@ -33,6 +33,8 @@ The restoration process tends to be relatively easy if the cluster is freshly la
 
 ## Manual storage balancing
 
+Elastic balances the shards allocated to each node trying to achieve a more or less same number of shards per node. This generates problems as shards could occupy vastly different ammounts of space, creating disbalance of disk usage between different nodes. The points below explain how to manually and automatically prevent and solve this.  
+
 - Get storage usage per elastic node. 
   ```
   GET _cat/allocation?v
@@ -41,6 +43,19 @@ The restoration process tends to be relatively easy if the cluster is freshly la
   ```
   GET _cat/shards?v&s=store:desc
   ```
+- Command to change the disk watermark low and high. Low: no additional shards will be allocated if the storage is above that value. High: shards will be moved to another node if storages surpasses this value. (previously 90%)
+
+  ```
+  PUT _cluster/settings
+  {
+    "transient": {
+      "cluster.routing.allocation.disk.watermark.low": "65%",
+      "cluster.routing.allocation.disk.watermark.high": "85%"
+    }
+  }
+  ```
+
+
 - Move one index from one node to another. This is useful because Elasticsearch does not balance the indices based in its size, as it simply tries to have a similar number of shards in each node.
   ```
   POST /_cluster/reroute
