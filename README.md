@@ -33,6 +33,10 @@ The restoration process tends to be relatively easy if the cluster is freshly la
 
 ## Manual storage balancing
 
+- Get storage usage per elastic node. 
+  ```
+  GET _cat/allocation?v
+  ```
 - List all indices, their node allocation and size. Ordered by descending order by size.
   ```
   GET _cat/shards?v&s=store:desc
