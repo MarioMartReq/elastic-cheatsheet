@@ -35,6 +35,9 @@ The restoration process tends to be relatively easy if the cluster is freshly la
 
 Elastic balances the shards allocated to each node trying to achieve a more or less same number of shards per node. This generates problems as shards could occupy vastly different ammounts of space, creating disbalance of disk usage between different nodes. The points below explain how to manually and automatically prevent and solve this.  
 
+Link to [elastic documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-cluster.html#modules-cluster) regarding this topic.
+
+
 - Get storage usage per elastic node. 
   ```
   GET _cat/allocation?v
